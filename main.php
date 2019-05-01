@@ -14,20 +14,27 @@ $client = new Client(new Hoa\Socket\Client($uri));
 
 // JOIN ROCKET LEAGUE CHANNEL ON BOOT UP
 $client->on('open', function(Hoa\Event\Bucket $bucket) {
-	$bucket->getSource()->join('RlRankTracker', '##rocketleague');
+	$bucket->getSource()->join('RLRankTracker', '##rocketleague');
 	return;
 });
 
 
 // RESPOND TO MESSAGES
 $client->on('message', function(Bucket $bucket) {
+	respondToMessage($bucket);
+});
+
+$client->on('private-message', function(Bucket $bucket) {
+	respondToMessage($bucket);
+});
+
+function respondToMessage(&$bucket) {
 	$data	= $bucket->getData();
 	$message= $data['message'];
 	$sender = $data['from']['nick'];
 	global $IrcCommands;
 
 	print($sender . ": " . $message . "\n");
-
 
 	//Check if message was a command
 	if(substr($message, 0, 1) == ".") {
@@ -52,13 +59,12 @@ $client->on('message', function(Bucket $bucket) {
 				$IrcCommands[$command]['function']($bucket, $args);	
 			} else {
 				$bucket->getSource()->say($command . ": " . $IrcCommands[$command]['help']);
-			}
+			}      
 		} else {
 			$bucket->getSource()->say("Command " . $command . " does not exist.");
 		}		
 	}
-});
 
-
+}
 
 $client->run();
