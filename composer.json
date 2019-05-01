@@ -1,0 +1,7 @@
+{
+    "require": {
+        "hoa/irc": "0.17.01.10",
+        "hoa/socket": "1.17.05.16",
+        "imangazaliev/didom": "^1.14"
+    }
+}
