@@ -5,6 +5,7 @@ require_once 'Config.php';
 require_once 'TimedEvents.php';
 require_once 'Rank.php';
 require_once 'IrcCommands.php';
+require_once 'CustomCommands.php';
 
 use Hoa\Irc\Client;
 use Hoa\Event\Bucket;
