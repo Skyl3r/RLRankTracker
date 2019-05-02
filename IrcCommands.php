@@ -8,6 +8,7 @@ $IrcCommands = [
 		'required_args' => 1,
 		'help'			=> "Requires one argument [steamprofile]",
 		'function'		=> function (&$bucket, &$args) {
+			Global $Ranks;
 			$rank = new Rank();
 			$rank->steamProfile = $args[1] . "";
 			$statusCode = $rank->getRank();
@@ -15,7 +16,7 @@ $IrcCommands = [
 			if($statusCode == 0) { // Was successful
 				$rankString = "Ranks for " . $rank->rocketLeagueName . ": ";
 				foreach($rank->ranks as $gameType => $rankData) {
-					$rankString .= $gameType . ": " . $rankData . " | ";
+					$rankString .= $gameType . ": " . $Ranks[$rankData] . " | ";
 				}
 				
 				$rankString .= "See more at " . $rank->url;
@@ -26,6 +27,7 @@ $IrcCommands = [
 			}
 		}	
 	],
+
 	"checknews"  => [
 		'required_args' => 0,
 		'help'			=> "Checks rltracker.pro for the latest RocketLeague news",
@@ -35,6 +37,7 @@ $IrcCommands = [
 		}
 
 	],
+
 	"setprofile" => [
 		'required_args' => 1,
 		'help'			=> "Sets your steam profile for easy access later. Requires one arg [steamprofile]",
