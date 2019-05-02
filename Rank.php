@@ -77,7 +77,7 @@ class Rank {
 			$this->stats['MVPs']				= $document->find($baseStat . "div[1]/div[3]/span[1]/text()", Query::TYPE_XPATH)[0];
 			$this->stats['Saves']				= $document->find($baseStat . "div[1]/div[4]/span[1]/text()", Query::TYPE_XPATH)[0];
 			$this->stats['Shots']				= $document->find($baseStat . "div[1]/div[5]/span[1]/text()", Query::TYPE_XPATH)[0];
-			$this->stats['Assists']				= $document->find($baseStat . "div[1]/div[5]/span[1]/text()", Query::TYPE_XPATH)[0];
+			$this->stats['Assists']				= $document->find($baseStat . "div[1]/div[6]/span[1]/text()", Query::TYPE_XPATH)[0];
 	
 			foreach($this->stats as &$stat) {
 				$stat = str_replace("\n", "", $stat);
