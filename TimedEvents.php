@@ -55,13 +55,13 @@ $TimedEvent = [
 			if(key_exists($profile[0], $ranks)) {
 				
 				foreach($ranks[$profile[0]]->ranks as $rank => &$value) {
-					if($comparisonRanks[$rank] < $value) {
-						$bucket->getSource()->say("Back to the drawing board " . $profile[0] . "! Demoted in " . $rank . " to " . $Ranks[$comparisonRanks[$rank]]); 
+					if($comparisonRanks->ranks[$rank] < $value) {
+						$bucket->getSource()->say("Back to the drawing board " . $profile[0] . "! Demoted in " . $rank . " to " . $Ranks[$comparisonRanks->ranks[$rank]]); 
 					}
-					if($comparisonRanks[$rank] > $value) {
-						$bucket->getSource()->say("Good work ". $profile[0] . "! Promoted in " . $rank . " to " . $Ranks[$comparisonRanks[$rank]]);
+					if($comparisonRanks->ranks[$rank] > $value) {
+						$bucket->getSource()->say("Good work ". $profile[0] . "! Promoted in " . $rank . " to " . $Ranks[$comparisonRanks->ranks[$rank]]);
 					}
-					$value = $comparisonRanks[$rank];
+					$value = $comparisonRanks->ranks[$rank];
 				}
 
 			} else {
