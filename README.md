@@ -34,3 +34,8 @@ Run by launching the main.php file with php:
 ```
 php main.php
 ```
+
+
+
+## Known Issues
+- The bot currently responds in main channel instead of via PM to private messages
