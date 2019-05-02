@@ -2,6 +2,7 @@
 
 require_once 'vendor/autoload.php';
 require_once 'Config.php'; 
+require_once 'TimedEvents.php';
 require_once 'Rank.php';
 require_once 'IrcCommands.php';
 
@@ -28,6 +29,16 @@ $client->on('message', function(Bucket $bucket) {
 
 $client->on('private-message', function(Bucket $bucket) {
 	respondToMessage($bucket);
+});
+
+$client->on('ping', function(Bucket $bucket) {
+	//Ping is a good periodical check to fire off events
+
+	Global $TimedEvent;
+	
+	foreach($TimedEvent as $event) {
+		$event($bucket);
+	}
 });
 
 function respondToMessage(&$bucket) {
