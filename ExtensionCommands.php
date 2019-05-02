@@ -21,7 +21,7 @@ $ExtensionCommands = [
 		];
 
 		foreach($triggerWords as $word) {
-			if(strtolower($args[1], $word) == false) {
+			if(strpos(strtolower($args[1]), $word) == false) {
 
 			} else {
 				$quickChatRand = $quickChat[rand(0, count($quickChat))];
