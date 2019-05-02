@@ -2,7 +2,7 @@
 
 use DiDom\Document;
 use DiDom\Query;
-require_once 'Rank.php'
+require_once 'Rank.php';
 
 $TimedEvent = [
 
@@ -36,6 +36,7 @@ $TimedEvent = [
 
 	'Check Ranks'		=> function(&$bucket) {
 		Global $Ranks;
+		print("Running test of ranks\n");
 
 		$profiles	= [];
 		$ranks		= [];
@@ -68,6 +69,7 @@ $TimedEvent = [
 			}
 		}
 
+		print("Saving rank file\n");
 		file_put_contents('ranks.txt', serialize($ranks));
 
 	}
