@@ -54,7 +54,7 @@ function respondToMessage(&$bucket) {
 	
 	//Process Extension Commands
 	foreach($ExtensionCommands as $command) {
-		$command($bucket, [$sender, substr($message, 1, strlen($message)-1)]);
+		$command($bucket, [$sender, substr($message, 0, strlen($message)-1)]);
 	}
 
 
