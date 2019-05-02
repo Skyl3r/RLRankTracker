@@ -1,6 +1,7 @@
 <?php
 
 require_once 'vendor/autoload.php';
+require_once 'Config.php'; 
 require_once 'Rank.php';
 require_once 'IrcCommands.php';
 
@@ -8,13 +9,14 @@ use Hoa\Irc\Client;
 use Hoa\Event\Bucket;
 
 
-$uri	= "irc://chat.freenode.net"; 
+$uri	= $Configs['default_server'];
 $client = new Client(new Hoa\Socket\Client($uri));
 
 
 // JOIN ROCKET LEAGUE CHANNEL ON BOOT UP
 $client->on('open', function(Hoa\Event\Bucket $bucket) {
-	$bucket->getSource()->join('RLRankTracker', '##rocketleague');
+	Global $Configs;
+	$bucket->getSource()->join($Configs['default_username'], $Configs['default_channel']);
 	return;
 });
 
