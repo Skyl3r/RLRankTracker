@@ -30,7 +30,7 @@ $IrcCommands['addprofile'] = [
 
 		$profiles[] = [$args[1], $args[2]];
 
-		file_put_contents(serialize($profiles));
+		file_put_contents($profilesFile, serialize($profiles));
 
 		$bucket->getSource()->say("Added profile " . $args[1] . " with steam ID " . $args[2]);
 
