@@ -23,11 +23,7 @@ Use composer to get dependencies:
 cd RLRankTracker
 composer update
 ```
-
-Edit the main.php file to change what default channel the bot should join as well as it's name on line 17.
-```
-$bucket->getSource()->join('YourUsername', '##YourChannel');
-```
+Edit Config.php and set your preferred default settings.
 
 Run by launching the main.php file with php:
 ```
