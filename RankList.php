@@ -1,6 +1,6 @@
 <?php
 
-$Ranks = {
+$Ranks = [ 
 0 => "Unranked",
 1 => "Bronze I",
 2 => "Bronze II",
@@ -21,4 +21,4 @@ $Ranks = {
 17 => "Champion II",
 18 => "Champion III",
 19 => "Grand Champion"
-}
+];

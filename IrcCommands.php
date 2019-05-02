@@ -8,6 +8,7 @@ $IrcCommands = [
 		'required_args' => 1,
 		'help'			=> "Requires one argument [steamprofile]",
 		'function'		=> function (&$bucket, &$args) {
+			global $Ranks;
 			$rank = new Rank();
 			$rank->steamProfile = $args[1] . "";
 			$statusCode = $rank->getRank();
@@ -15,7 +16,7 @@ $IrcCommands = [
 			if($statusCode == 0) { // Was successful
 				$rankString = "Ranks for " . $rank->rocketLeagueName . ": ";
 				foreach($rank->ranks as $gameType => $rankData) {
-					$rankString .= $gameType . ": " . $rankData . " | ";
+					$rankString .= $gameType . ": " . $Ranks[$rankData] . " | ";
 				}
 				
 				$rankString .= "See more at " . $rank->url;
@@ -80,6 +81,14 @@ $IrcCommands = [
 			}
 
 			$bucket->getSource()->say("Could not find Steam Profile for user " . $args[1]);
+
+		}
+	],
+
+	"track" => [
+		'required_args' => 1,
+		'help'			=> "Sets a steam profile to be tracked. Requires one arg [steamprofile]",
+		'function'		=> function(&$bucket, $args) {
 
 		}
 	]
