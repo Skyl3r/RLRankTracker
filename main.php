@@ -6,6 +6,7 @@ require_once 'TimedEvents.php';
 require_once 'Rank.php';
 require_once 'IrcCommands.php';
 require_once 'CustomCommands.php';
+require_once 'ExtensionCommands.php';
 
 use Hoa\Irc\Client;
 use Hoa\Event\Bucket;
@@ -47,8 +48,17 @@ function respondToMessage(&$bucket) {
 	$message= $data['message'];
 	$sender = $data['from']['nick'];
 	global $IrcCommands;
+	global $ExtensionCommands;
 
 	print($sender . ": " . $message . "\n");
+	
+	//Process Extension Commands
+	foreach($ExtensionCommands as $command) {
+		$command($bucket, [$sender, $message]);
+	}
+
+
+	//Process IRC Commands:
 
 	//Check if message was a command
 	if(substr($message, 0, 1) == ".") {
