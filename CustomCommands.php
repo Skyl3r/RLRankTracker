@@ -12,3 +12,27 @@
 //	}
 //
 //];
+
+
+$IrcCommands['addprofile'] = [
+
+	'required_args'		=> 2,
+	'help'				=> "Adds steamprofile for a IRC user. usage: .addprofile [IRCuser] [steamprofile]",
+	'function'			=> function(&$bucket, $args) {
+		Global $Configs;
+
+		$profilesFile = $Configs['default_profiles_file'];
+		$profiles = [];
+	
+		if(file_exists($profilesFile)) {
+			$profiles = unserialize(file_get_contents($profilesFile));
+		}
+
+		$profiles[] = [$args[1], $args[2]];
+
+		file_put_contents(serialize($profiles));
+
+		$bucket->getSource()->say("Added profile " . $args[1] . " with steam ID " . $args[2]);
+
+	}
+];
