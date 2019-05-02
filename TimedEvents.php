@@ -49,7 +49,7 @@ $TimedEvent = [
 
 		foreach($profiles as $profile) {
 			$comparisonRanks = new Rank();
-			$comparisonRanks->rocketLeagueName = $profile;
+			$comparisonRanks->steamProfile = $profile;
 			$comparisonRanks->getRank();
 
 			if(key_exists($profile[0], $ranks)) {
