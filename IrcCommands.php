@@ -26,7 +26,15 @@ $IrcCommands = [
 			}
 		}	
 	],
+	"checknews"  => [
+		'required_args' => 0,
+		'help'			=> "Checks rltracker.pro for the latest RocketLeague news",
+		'function'		=> function(&$bucket, $args) {
+			Global $TimedEvent;
+			$TimedEvent['Check For News']();
+		}
 
+	],
 	"setprofile" => [
 		'required_args' => 1,
 		'help'			=> "Sets your steam profile for easy access later. Requires one arg [steamprofile]",
