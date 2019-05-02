@@ -8,7 +8,6 @@ $IrcCommands = [
 		'required_args' => 1,
 		'help'			=> "Requires one argument [steamprofile]",
 		'function'		=> function (&$bucket, &$args) {
-			global $Ranks;
 			$rank = new Rank();
 			$rank->steamProfile = $args[1] . "";
 			$statusCode = $rank->getRank();
@@ -16,7 +15,7 @@ $IrcCommands = [
 			if($statusCode == 0) { // Was successful
 				$rankString = "Ranks for " . $rank->rocketLeagueName . ": ";
 				foreach($rank->ranks as $gameType => $rankData) {
-					$rankString .= $gameType . ": " . $Ranks[$rankData] . " | ";
+					$rankString .= $gameType . ": " . $rankData . " | ";
 				}
 				
 				$rankString .= "See more at " . $rank->url;
@@ -84,13 +83,37 @@ $IrcCommands = [
 
 		}
 	],
-
-	"track" => [
-		'required_args' => 1,
-		'help'			=> "Sets a steam profile to be tracked. Requires one arg [steamprofile]",
+	
+	'help'		=> [
+		'required_args'	=> 1,
+		'help'			=> "Requires one argument: function name",
 		'function'		=> function(&$bucket, $args) {
 
+			global $IrcCommands;
+
+			if(key_exists($args[1], $IrcCommands)) {
+				$bucket->getSource()->say($args[1] . ": " . $IrcCommands[$args[1]]['help']);
+			} else {
+				$bucket->getSource()->say($args[1] . ": not found. Use .getcommands to see available commands");
+			}
+
+		}
+
+	],
+
+	'getcommands'	=> [
+		'required_args' => 0,
+		'help'			=> 'Gets list of available commands. Requires no arguments',
+		'function'		=> function(&$bucket, $args) {
+			global $IrcCommands;
+
+			$commandList = "Available commands: ";
+
+			foreach($IrcCommands as $command => $commandData) {
+				$commandList .= $command . ' ';
+			}
+
+			$bucket->getSource()->say($commandList);
 		}
 	]
-
 ];
