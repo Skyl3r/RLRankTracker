@@ -23,9 +23,30 @@ $IrcCommands = [
 
 				$bucket->getSource()->say($rankString);
 			} else {
-				$bucket->getSource()->say("No ranks available for " . $steamProfile);
+				$bucket->getSource()->say("No ranks available for " . $rank->steamProfile);
 			}
 		}	
+	],
+	
+	"getstats"	=> [
+		'required_args'	=> 1,
+		'help'			=> "Gets player stats. Requires one argument [steamprofile",
+		'function'		=> function(&$bucket, $args) {
+			$rank = new Rank();
+			$rank->steamProfile = $args[1];
+			$statusCode = $rank->getStats();
+
+			if($statusCode == 0) {
+				$statsString = "Stats for " . $rank->rocketLeagueName . ": ";
+				foreach($rank->stats as $stat => $value) {
+					$statsString .= $stat . " " . $value . "! ";
+				}
+				$bucket->getSource()->say($statsString);
+			} else {
+				$bucket->getSource()->say("No stats available for " . $rank->steamProfile);
+			}
+		}
+
 	],
 
 	"checknews"  => [

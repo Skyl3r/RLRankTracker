@@ -21,6 +21,15 @@ class Rank {
 
 	];
 
+	var $stats				= [
+		"Wins"		=> 0,
+		"Goals"		=> 0,
+		"Shots"		=> 0,
+		"Saves"		=> 0,
+		"MVPs"		=> 0,
+		"Assists"	=> 0
+	];
+
 	function getRank() {
 		global $Ranks;
 		try {		
@@ -48,6 +57,33 @@ class Rank {
 
 			$this->url = $url; // Store to return to the user 
 			
+			return 0;
+		} catch(Exception $e) {
+			return 1;
+		}
+	}
+
+	function getStats() {
+		Global $Ranks;
+		try {
+			$url			= "https://rltracker.pro/profiles/" . $this->steamProfile . "/steam";
+			$document		= new Document($url, true);
+			$baseStat		= "//div[@class='base_stat_col ']/";
+
+			$this->rocketLeagueName = $document->find("//h4/text()", Query::TYPE_XPATH)[0];
+
+			$this->stats['Wins']				= $document->find($baseStat . "div[1]/div[1]/span[1]/text()", Query::TYPE_XPATH)[0];
+			$this->stats['Goals']				= $document->find($baseStat . "div[1]/div[2]/span[1]/text()", Query::TYPE_XPATH)[0];
+			$this->stats['MVPs']				= $document->find($baseStat . "div[1]/div[3]/span[1]/text()", Query::TYPE_XPATH)[0];
+			$this->stats['Saves']				= $document->find($baseStat . "div[1]/div[4]/span[1]/text()", Query::TYPE_XPATH)[0];
+			$this->stats['Shots']				= $document->find($baseStat . "div[1]/div[5]/span[1]/text()", Query::TYPE_XPATH)[0];
+			$this->stats['Assists']				= $document->find($baseStat . "div[1]/div[5]/span[1]/text()", Query::TYPE_XPATH)[0];
+	
+			foreach($this->stats as &$stat) {
+				$stat = str_replace("\n", "", $stat);
+			}
+
+			$this->url = $url;
 			return 0;
 		} catch(Exception $e) {
 			return 1;
