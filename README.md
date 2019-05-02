@@ -15,10 +15,10 @@ RLRankTracker can monitor rltracker.pro/blogposts to check for new posts. If a n
 
 ## Setup
 
-### Dependencies
+#### Dependencies
 RLRankTracker depends on the Hoa IRC library as well as DiDom DOM parser library. Both of these can be gotten through composer. In addition, you need PHP extensions mbstring and xml.
 
-### Debian Setup
+#### Debian Setup
 Clone RLRankTracker:
 ```
 git clone https://github.com/Skyl3r/RLRankTracker
