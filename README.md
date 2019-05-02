@@ -2,7 +2,12 @@
 Rocket League Rank Tracking bot for IRC. This bot can be queried for steam user's Rocket League rankings. It utilizes rltracker.pro to get ranks.
 Currently it can map user's to steam profiles and get ranks.
 
-1. [Current Features](current_features)
+1. [Current Features](#current-features)
+2. [Setup](#setup)
+    * [Debian](#debian-setup)
+3. [Configuration](#configuration)
+4. [Custom Commands](#writing-custom-commands)
+5. [Known Issues](#known-issues)
 
 ## Current Features
 
