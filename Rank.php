@@ -32,8 +32,8 @@ class Rank {
 
 			$duelsString					= $document->find($currentSeason . "div[1]/div[2]/text()", Query::TYPE_XPATH)[0];
 			$doublesString					= $document->find($currentSeason . "div[2]/div[2]/text()", Query::TYPE_XPATH)[0];
-			$standardString					= $document->find($currentSeason . "div[3]/div[2]/text()", Query::TYPE_XPATH)[0];
-			$soloStandardString				= $document->find($currentSeason . "div[4]/div[2]/text()", Query::TYPE_XPATH)[0];
+			$standardString					= $document->find($currentSeason . "div[4]/div[2]/text()", Query::TYPE_XPATH)[0];
+			$soloStandardString				= $document->find($currentSeason . "div[3]/div[2]/text()", Query::TYPE_XPATH)[0];
 
 			foreach($Ranks as $key => $rank) {
 				if($duelsString == $rank) 
