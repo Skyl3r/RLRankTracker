@@ -9,7 +9,8 @@ $ExtensionCommands = [
 			'bitch',
 			'idiot',
 			'stupid',
-			'dumbass'
+			'dumbass',
+			'fuck you'
 		];
 
 		$quickChat		= [
@@ -22,7 +23,7 @@ $ExtensionCommands = [
 
 		foreach($triggerWords as $word) {
 			if(strpos(strtolower($args[1]), $word) !== false) {
-				$quickChatRand = $quickChat[rand(0, count($quickChat))];
+				$quickChatRand = $quickChat[rand(0, count($quickChat)-1)];
 				$bucket->getSource()->say($quickChatRand);
 				return;
 			}
