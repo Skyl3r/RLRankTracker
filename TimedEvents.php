@@ -21,6 +21,7 @@ $TimedEvent = [
 		try {
 			$blogdoc = new Document('https://rltracker.pro/blogposts/' . $lastNews['lastBlog'], true);
 			$blogHeadline = $blogdoc->find("/html/body/div[1]/div[3]/div/div/div/h4/text()", Query::TYPE_XPATH)[0];
+			$blogHeadline = str_replace("\n", "", $blogHeadline);
 			$bucket->getSource()->say("Latest News: " . $blogHeadline . "    |   Read more here: " . 'https://rltracker.pro/blogposts/' . $lastNews['lastBlog']);
 			
 			file_put_contents('news.txt', serialize($lastNews));	
