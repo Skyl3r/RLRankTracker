@@ -41,6 +41,10 @@ Run by launching the main.php file with php:
 php main.php
 ```
 
+## Configuration
+
+All configuration is done through the `Config.php` file.
+Basic settings involve server settings and the ability to change data cache locations.
 
 
 ## Known Issues
