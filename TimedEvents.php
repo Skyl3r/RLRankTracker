@@ -13,7 +13,7 @@ $TimedEvent = [
 		if(file_exists('news.txt'))
 			$lastNews = unserialize(file_get_contents('news.txt'));
 		else
-			$lastNews = ['lastBlog' => 457];
+			$lastNews = ['lastBlog' => 456];
 
 		//Check if there's something newer:
 		$lastNews['lastBlog']++;
