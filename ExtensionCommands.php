@@ -21,9 +21,8 @@ $ExtensionCommands = [
 		];
 
 		foreach($triggerWords as $word) {
-			if(strpos(strtolower($args[1]), $word) == false) {
-
-			} else {
+			print("Checking " . strtolower($args[1]) . " for " . $word . "\n");
+			if(strpos(strtolower($args[1]), $word) !== false) {
 				$quickChatRand = $quickChat[rand(0, count($quickChat))];
 				$bucket->getSource()->say($quickChatRand);
 				return;
