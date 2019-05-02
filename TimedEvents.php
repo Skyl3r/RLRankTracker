@@ -9,10 +9,12 @@ $TimedEvent = [
 	'event'				=> function(&$bucket) {;},
 	
 	'Check For News'	=> function(&$bucket) {
-		
+		Global $Configs;
+		$newsFile = $Configs['default_news_file'];
+
 		//Get last news found (or none)
-		if(file_exists('news.txt'))
-			$lastNews = unserialize(file_get_contents('news.txt'));
+		if(file_exists($newsFile))
+			$lastNews = unserialize(file_get_contents($newsFile));
 		else
 			$lastNews = ['lastBlog' => 456];
 
@@ -25,7 +27,7 @@ $TimedEvent = [
 			$blogHeadline = str_replace("\n", "", $blogHeadline);
 			$bucket->getSource()->say("Latest News: " . $blogHeadline . "    |   Read more here: " . 'https://rltracker.pro/blogposts/' . $lastNews['lastBlog']);
 			
-			file_put_contents('news.txt', serialize($lastNews));	
+			file_put_contents($newsFile, serialize($lastNews));	
 		}
 
 		catch(Exception $e) {
@@ -35,17 +37,20 @@ $TimedEvent = [
 	},
 
 	'Check Ranks'		=> function(&$bucket) {
+		Global $Configs;
 		Global $Ranks;
-		print("Running test of ranks\n");
+
+		$ranksFile		= $Configs['default_ranks_file'];
+		$profilesFile	= $Configs['default_profiles_file'];
 
 		$profiles	= [];
 		$ranks		= [];
 
-		if(file_exists('ranks.txt'))
-			$ranks = unserialize(file_get_contents('ranks.txt'));
+		if(file_exists($ranksFile))
+			$ranks = unserialize(file_get_contents($ranksFile));
 		
-		if(file_exists('profiles.txt'))
-			$profiles = unserialize(file_get_contents('profiles.txt'));
+		if(file_exists($profilesFile))
+			$profiles = unserialize(file_get_contents($profilesFile));
 
 		foreach($profiles as $profile) {
 			$comparisonRanks = new Rank();
@@ -69,8 +74,7 @@ $TimedEvent = [
 			}
 		}
 
-		print("Saving rank file\n");
-		file_put_contents('ranks.txt', serialize($ranks));
+		file_put_contents($ranksFile, serialize($ranks));
 
 	}
 

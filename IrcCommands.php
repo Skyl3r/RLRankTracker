@@ -42,9 +42,8 @@ $IrcCommands = [
 		'required_args' => 1,
 		'help'			=> "Sets your steam profile for easy access later. Requires one arg [steamprofile]",
 		'function'		=> function(&$bucket, &$args) {
-
-			//Default profiles.txt will be _PROJECT_ROOT_/profiles.txt
-			$profilesFile		= 'profiles.txt';  //Adjust if you want different location
+			Global $Configs;
+			$profilesFile = $Configs['default_profiles_file'];
 			$currentProfiles	= [];
 
 			if(file_exists($profilesFile)) {
@@ -76,7 +75,8 @@ $IrcCommands = [
 		'required_args'	=> 1,
 		'help'			=> "Gets a stored steam profile for user. Requires one arg [username]",
 		'function'		=> function(&$bucket, $args) {
-			$profilesFile	= "profiles.txt";
+			Global $Configs;
+			$profilesFile	= $Configs['default_profiles_file'];
 
 			if(file_exists($profilesFile)) {
 				$fileData = file_get_contents($profilesFile);
