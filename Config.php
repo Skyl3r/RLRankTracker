@@ -2,6 +2,6 @@
 
 $Configs = [
 	'default_server'	=> 'irc://chat.freenode.net',
-	'default_channel'	=> '##rocketleague2',
-	'default_username'	=> 'RLRankTracker2'
+	'default_channel'	=> '##rocketleague',
+	'default_username'	=> 'RLRankTracker'
 ];
