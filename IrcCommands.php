@@ -47,9 +47,6 @@ $IrcCommands = [
 		'required_args'	=> 1,
 		'help'			=> "Gets player stats. Requires one argument [steamprofile]. To use IRC name, use irc:username",
 		'function'		=> function(&$bucket, $args) {
-			$bucket->getSource()->say("Feature under construction. Check back later.");
-			return;
-
 			$steamProfile = $args[1];
 
 			if(substr($steamProfile, 0, 4) == "irc:") {
@@ -64,6 +61,9 @@ $IrcCommands = [
 			$rank = new Rank();
 			$rank->steamProfile = $steamProfile;
 			$statusCode = $rank->getStats();
+
+			$bucket->getSource()->say("Feature under construction. Check back later!");
+			return;
 
 			if($statusCode == 0) {
 				$statsString = "Stats for " . $rank->rocketLeagueName . ": ";
