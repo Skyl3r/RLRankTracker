@@ -70,26 +70,14 @@ $IrcCommands['command_name']['function'] = function(&$bucket, $args) {};
 
 #### Referencing user profiles
 
-User profiles are stored in a serialized text file. The default is `profiles.txt`, the location is stored in the global $Configs array. When unserialized, you will get an array as follows:
+User profiles should be accessed via the `ProfileManager` class.  
 ```php
-profiles = [
-['irc_name', 'steam_id'],
-['irc_name', 'steam_id'],
-..
-];
+$profileManager = new ProfileManager();
+$steamprofile = $profileManager->getProfile("IrcName");
+$profileManager->setProfile("IrcName", "SteamID");
+$profileManager->saveProfiles();
 ```
-To add to, modify or read from the list of profiles, you can do something like:
-```php
-Global $Configs;
-$profiles = [];
-if(file_exists($Configs['default_profiles_file'])) {
-    $profiles = unserialize(file_get_contents($Configs['default_profiles_file']));
-}
-```
-Saving changes is done in the same manner.
-```php
-file_put_contents($Configs['default_profiles_file'], serialize($profiles));
-```
+Setting a profile only adds it to that instance of the `ProfileManager`. To save the change, you must call `saveProfiles()`.
 
 #### The Rank class
 
