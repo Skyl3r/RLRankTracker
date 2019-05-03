@@ -37,6 +37,7 @@ $TimedEvent = [
 	},
 
 	'Check Ranks'		=> function(&$bucket) {
+		return;
 		Global $Configs;
 		Global $Ranks;
 
