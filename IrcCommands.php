@@ -80,7 +80,7 @@ $IrcCommands = [
 		'help'			=> "Checks rltracker.pro for the latest RocketLeague news",
 		'function'		=> function(&$bucket, $args) {
 			Global $TimedEvent;
-			$TimedEvent['Check For News']();
+			$TimedEvent['Check For News']($bucket);
 		}
 
 	],
