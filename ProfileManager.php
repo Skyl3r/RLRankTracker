@@ -15,7 +15,6 @@ Class ProfileManager {
 	}
 
 	function getProfile($username) {
-		print("Searching for " . $username . "\n");
 		//Update profiles
 		$this->getProfiles();
 
@@ -26,5 +25,35 @@ Class ProfileManager {
 		}
 
 		return "";
+	}
+
+	// Returns 1 for $username already exists, overwritten
+	// Returns 0 for success
+	function setProfile($username, $steamprofile) {
+		$this->getProfiles();
+
+		foreach($this->profiles as &$profile) {
+			if($profile[0] == $username) {
+				$profile[1] = $steamProfile;
+				return 1;
+			}
+		}
+
+		$this->profiles[] = [$username, $steamprofile];
+		return 0;
+
+	}
+
+	// Returns 0 for success
+	// Returns -1 for error
+	function saveProfiles() {
+		Global $Configs;
+
+		if(Count($this->profiles) > 0) {
+			file_put_contents($Configs['default_profiles_file'], serialize($this->profiles));
+			return 0;
+		}
+
+		return -1;
 	}
 }
