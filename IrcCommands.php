@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Rank.php';
+require_once 'ProfileManager.php';
 
 $IrcCommands = [
 
@@ -9,9 +10,23 @@ $IrcCommands = [
 		'help'			=> "Requires one argument [steamprofile]",
 		'function'		=> function (&$bucket, &$args) {
 			Global $Ranks;
+			
+			$steamProfile = $args[1];
+			
+			if(substr($steamProfile, 0, 4) == "irc:") {
+				$profileManager = new ProfileManager();
+				$steamProfile = $profileManager->getProfile(substr($steamProfile, 4));
+				if($steamProfile == "") {
+					$bucket->getSource()->say("No steam profile for " . substr($steamProfile, 4));
+					return;
+				}
+			}
+			
 			$rank = new Rank();
-			$rank->steamProfile = $args[1] . "";
+			$rank->steamProfile = $steamProfile;
 			$statusCode = $rank->getRank();
+
+			
 
 			if($statusCode == 0) { // Was successful
 				$rankString = "Ranks for " . $rank->rocketLeagueName . ": ";
@@ -30,10 +45,21 @@ $IrcCommands = [
 	
 	"getstats"	=> [
 		'required_args'	=> 1,
-		'help'			=> "Gets player stats. Requires one argument [steamprofile",
+		'help'			=> "Gets player stats. Requires one argument [steamprofile]. To use IRC name, use irc:username",
 		'function'		=> function(&$bucket, $args) {
+			$steamProfile = $args[1];
+
+			if(substr($steamProfile, 0, 4) == "irc:") {
+				$profileManager = new ProfileManager();
+				$steamProfile = $profileManager->getProfile(substr($steamProfile, 4));
+				if($steamProfile == "") {
+					$bucket->getSource()->say("No steam profile for " . substr($steamProfile, 4));
+					return;
+				}
+			}
+	
 			$rank = new Rank();
-			$rank->steamProfile = $args[1];
+			$rank->steamProfile = $steamProfile;
 			$statusCode = $rank->getStats();
 
 			if($statusCode == 0) {

@@ -7,6 +7,7 @@ require_once 'RankList.php';
 
 class Rank {
 
+
 	var $steamProfile		= "";
 	var $ircName			= "";
 	var $rocketLeagueName	= "";
@@ -46,13 +47,16 @@ class Rank {
 
 			foreach($Ranks as $key => $rank) {
 				if($duelsString == $rank) 
-					$this->ranks["Duels"] = $key;
+					$this->ranks["Duels"]			= $key;
+
 				if($doublesString == $rank)
-					$this->ranks["Doubles"] = $key;
+					$this->ranks["Doubles"]			= $key;
+
 				if($standardString == $rank)
-					$this->ranks["Standard"] = $key;
+					$this->ranks["Standard"]		= $key;
+
 				if($soloStandardString == $rank)
-					$this->ranks["Solo Standard"] = $key;
+					$this->ranks["Solo Standard"]	= $key;
 			}
 
 			$this->url = $url; // Store to return to the user 
