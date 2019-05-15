@@ -1,4 +1,4 @@
-# No Deprecated. See new project here:
+# Now Deprecated. See new project here:
 https://github.com/SaltieRL/discord-bot/tree/v2
 
 # RLRankTracker
