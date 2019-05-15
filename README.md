@@ -1,3 +1,6 @@
+# No Deprecated. See new project here:
+https://github.com/SaltieRL/discord-bot/tree/v2
+
 # RLRankTracker
 Rocket League Rank Tracking bot for IRC. This bot can be queried for steam user's Rocket League rankings. It utilizes rltracker.pro to get ranks.
 Currently it can map user's to steam profiles and get ranks.
